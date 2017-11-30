@@ -3,39 +3,63 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class Main {
-
-	private static class HelloWorldDisplay extends JPanel {
-	      public void paintComponent(Graphics g) {
-	         super.paintComponent(g);
-	         g.drawString( "Hello World!", 20, 30 );
+	   
+	   private static class MonsterButtonHandler implements ActionListener {
+	      public void actionPerformed(ActionEvent e) {
+	    	  	
 	      }
 	   }
 	   
-	   private static class ButtonHandler implements ActionListener {
-	      public void actionPerformed(ActionEvent e) {
-	         System.exit(0);
-	      }
-	   }
+	   private static class CharacterButtonHandler implements ActionListener {
+		      public void actionPerformed(ActionEvent e) {
+		    	  	
+		      }
+		   }
+	   
+	   private static class SummonButtonHandler implements ActionListener {
+		  public void actionPerformed(ActionEvent e) {
+		    	  	
+		  }
+		}
 	
 	public static void main(String[] args) {
 		
-		HelloWorldDisplay displayPanel = new HelloWorldDisplay();
-	    JButton okButton = new JButton("OK");
-	    ButtonHandler listener = new ButtonHandler();
-	    okButton.addActionListener(listener);
+	    JButton monsterGenButton = new JButton("Generate Monster Sheet");
+	    MonsterButtonHandler monsterlistener = new MonsterButtonHandler();
+	    monsterGenButton.addActionListener(monsterlistener);
 
-	    JPanel content = new JPanel();
-	    content.setLayout(new BorderLayout());
-	    content.add(displayPanel, BorderLayout.CENTER);
-	    content.add(okButton, BorderLayout.SOUTH);
+	    JPanel monsterSheet = new JPanel();
+	    monsterSheet.setLayout(new BorderLayout());
+	    monsterSheet.add(monsterGenButton, BorderLayout.SOUTH);
+	    
+	    JButton characterGenButton = new JButton("Generate Character Sheet");
+	    CharacterButtonHandler characterlistener = new CharacterButtonHandler();
+	    characterGenButton.addActionListener(characterlistener);
+
+	    JPanel characterSheet = new JPanel();
+	    characterSheet.setLayout(new BorderLayout());
+	    characterSheet.add(characterGenButton, BorderLayout.SOUTH);
+	    
+	    JButton summonGenButton = new JButton("Generate Summon Sheet");
+	    SummonButtonHandler summonlistener = new SummonButtonHandler();
+	    summonGenButton.addActionListener(summonlistener);
+
+	    JPanel summonSheet = new JPanel();
+	    summonSheet.setLayout(new BorderLayout());
+	    summonSheet.add(summonGenButton, BorderLayout.SOUTH);
 	      
-		JFrame frame = new JFrame();
-		frame.setContentPane(content);
-	    frame.setSize(250,100);
+	    JTabbedPane tabbedPane = new JTabbedPane();
+	    tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+	    tabbedPane.addTab("Monster", monsterSheet);
+	    tabbedPane.addTab("Character", characterSheet);
+	    tabbedPane.addTab("Summon", summonSheet);
+	    
+		JFrame frame = new JFrame("Dungeons & Dragons Sheet Generator");
+		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);;
+	    frame.setSize(500,800);
 	    frame.setLocation(100,100);
 	    frame.setVisible(true);
-		
-		System.out.println("Hello World");
+	    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 	}
 
