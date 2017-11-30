@@ -3,24 +3,32 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class Main {
+	
+	public static JTabbedPane tabbedPane;
 	   
-	   private static class MonsterButtonHandler implements ActionListener {
-	      public void actionPerformed(ActionEvent e) {
-	    	  	
-	      }
-	   }
-	   
-	   private static class CharacterButtonHandler implements ActionListener {
-		      public void actionPerformed(ActionEvent e) {
-		    	  	
-		      }
-		   }
-	   
-	   private static class SummonButtonHandler implements ActionListener {
-		  public void actionPerformed(ActionEvent e) {
-		    	  	
-		  }
+	private static class MonsterButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JLabel text = new JLabel("Monster Sheet");
+		    JPanel monsterSheet = new JPanel();
+		    monsterSheet.setLayout(new BorderLayout());
+		    monsterSheet.add(text,BorderLayout.NORTH);
+		    
+			tabbedPane.addTab("Monster Sheet", monsterSheet);
+			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 		}
+	}
+	   
+	private static class CharacterButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+		    	  	
+		}
+	}
+	   
+	private static class SummonButtonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+		    	  	
+		}
+	}
 	
 	public static void main(String[] args) {
 		
@@ -48,7 +56,7 @@ public class Main {
 	    summonSheet.setLayout(new BorderLayout());
 	    summonSheet.add(summonGenButton, BorderLayout.SOUTH);
 	      
-	    JTabbedPane tabbedPane = new JTabbedPane();
+	    tabbedPane = new JTabbedPane();
 	    tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 	    tabbedPane.addTab("Monster", monsterSheet);
 	    tabbedPane.addTab("Character", characterSheet);
