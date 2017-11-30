@@ -1,0 +1,5 @@
+Blindsight
+Passive Perception
+Darkvision
+Truesight
+Tremorsense
