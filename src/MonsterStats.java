@@ -5,7 +5,7 @@ public class MonsterStats {
 	private int str, dex, con, intel, wis, cha;
 	private int strM, dexM, conM, intelM, wisM, chaM;
 	private int hp, ac, speed;
-	String savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
+	private String savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
 	
 	public MonsterStats() { }
 	
@@ -17,8 +17,8 @@ public class MonsterStats {
 		this.setIntel(abilities[3]);
 		this.setWis(abilities[4]);
 		this.setCha(abilities[5]);
-//		this.setHp(gen.generateHP(totalDice, hitDice, conMod));
 		this.setAc(10 + this.getDexM());
+		this.setSpeed(30);
 	}
 
 	public int getStr() {
@@ -137,5 +137,13 @@ public class MonsterStats {
 
 	public void setAc(int ac) {
 		this.ac = ac;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
 	}
 }
