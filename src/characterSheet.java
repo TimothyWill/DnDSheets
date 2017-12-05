@@ -124,6 +124,7 @@ public class characterSheet {
                 "Error reading file '" 
                 + file + "'");                  
         }
+		file = "hitDice";
 		try {
 			FileInputStream fs= new FileInputStream(file);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fs));
