@@ -8,12 +8,82 @@ public class Main {
 	   
 	private static class MonsterButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JLabel text = new JLabel("Monster Sheet");
-		    JPanel monsterSheet = new JPanel();
-		    monsterSheet.setLayout(new BorderLayout());
-		    monsterSheet.add(text,BorderLayout.NORTH);
+			JLabel name = new JLabel("Monster Name");
+			JLabel armorClass = new JLabel("Armor Class ");
+			JLabel hitPoints = new JLabel("Hit Points ");
+			JLabel speed = new JLabel("Speed ");
+			
+			JLabel strStat = new JLabel("STR");
+			JLabel dexStat = new JLabel("DEX");
+			JLabel conStat = new JLabel("CON");
+			JLabel intStat = new JLabel("INT");
+			JLabel wisStat = new JLabel("WIS");
+			JLabel chaStat = new JLabel("CHA");
+			
+			JLabel savingThrows = new JLabel("Saving Throws");
+			JLabel skills = new JLabel("Skills");
+			JLabel dImmunities = new JLabel("Damage Immunities");
+			JLabel cImmunities = new JLabel("Condition Immunities");
+			JLabel senses = new JLabel("Senses");
+			JLabel languages = new JLabel("Languages");
+			JLabel challenge = new JLabel("Challenge");
+			
+		    JPanel monsterSheet = new JPanel();    
+		    Dimension dimension = new Dimension(300, 300);
+		    monsterSheet.setMaximumSize(dimension);
+		    monsterSheet.setMinimumSize(dimension);
+		    monsterSheet.setPreferredSize(dimension);
+		    monsterSheet.setLayout(new GridBagLayout());
+		    GridBagConstraints c = new GridBagConstraints();
+		    c.fill = GridBagConstraints.HORIZONTAL;
+		    c.gridx = 0;
+		    c.gridy = 0;
+		    c.ipady = 10;
+	        c.ipadx = 10;
+		    c.gridheight = 1;
+		    c.gridwidth = 1;
 		    
-			tabbedPane.addTab("Monster Sheet", monsterSheet);
+		    monsterSheet.add(name, c);
+		    
+		    c.gridy = 1;
+		    monsterSheet.add(armorClass, c);
+		    c.gridy = 2;
+		    monsterSheet.add(hitPoints, c);
+		    c.gridy = 3;
+		    monsterSheet.add(speed, c);
+		    
+		    c.gridy = 4;
+		    monsterSheet.add(strStat, c);
+		    c.gridx = 1;
+		    monsterSheet.add(dexStat, c);
+		    c.gridx = 2;
+		    monsterSheet.add(conStat, c);
+		    c.gridx = 3;
+		    monsterSheet.add(intStat, c);
+		    c.gridx = 4;
+		    monsterSheet.add(wisStat, c);
+		    c.gridx = 5;
+		    monsterSheet.add(chaStat, c);
+		    
+		    c.gridx = 0;
+		    c.gridy = 6;
+		    monsterSheet.add(savingThrows, c);
+		    c.gridy = 7;
+		    monsterSheet.add(skills, c);
+		    c.gridy = 8;
+		    monsterSheet.add(dImmunities, c);
+		    c.gridy = 9;
+		    monsterSheet.add(cImmunities, c);
+		    c.gridy = 10;
+		    monsterSheet.add(senses, c);
+		    c.gridy = 11;
+		    monsterSheet.add(languages, c);
+		    c.gridy = 12;
+		    monsterSheet.add(challenge, c);
+		    
+		    JScrollPane scrPane = new JScrollPane(monsterSheet);
+		    
+			tabbedPane.addTab("Monster Sheet", scrPane);
 			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 		}
 	}
