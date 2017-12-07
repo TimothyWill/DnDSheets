@@ -5,7 +5,7 @@ public class MonsterStats {
 	private int str, dex, con, intel, wis, cha;
 	private int strM, dexM, conM, intelM, wisM, chaM;
 	private int hp, ac, speed;
-	private String savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
+	private String alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
 	
 	public MonsterStats() { }
 	

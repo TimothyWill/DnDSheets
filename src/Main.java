@@ -8,12 +8,119 @@ public class Main {
 	   
 	private static class MonsterButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JLabel text = new JLabel("Monster Sheet");
-		    JPanel monsterSheet = new JPanel();
-		    monsterSheet.setLayout(new BorderLayout());
-		    monsterSheet.add(text,BorderLayout.NORTH);
+			MonsterStats stats = new MonsterStats();
+			stats.generateAbilities();
+			
+			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
+			JLabel armorClass = new JLabel("<html><b>Armor Class </b>" + Integer.toString(stats.getAc()) + "</html>");
+			JLabel hitPoints = new JLabel("<html><b>Hit Points </b>" + Integer.toString(stats.getHp()) + "</html>");
+			JLabel speed = new JLabel("<html><b>Speed </b>" + "speedVal" + "</html>");
+			
+			JLabel strStat = new JLabel("<html><b>STR</b></html>", SwingConstants.CENTER);
+			JLabel dexStat = new JLabel("<html><b>DEX</b></html>", SwingConstants.CENTER);
+			JLabel conStat = new JLabel("<html><b>CON</b></html>", SwingConstants.CENTER);
+			JLabel intStat = new JLabel("<html><b>INT</b></html>", SwingConstants.CENTER);
+			JLabel wisStat = new JLabel("<html><b>WIS</b></html>", SwingConstants.CENTER);
+			JLabel chaStat = new JLabel("<html><b>CHA</b></html>", SwingConstants.CENTER);
+			
+			JLabel strStatV = new JLabel(Integer.toString(stats.getStr()), SwingConstants.CENTER);
+			JLabel dexStatV = new JLabel(Integer.toString(stats.getDex()), SwingConstants.CENTER);
+			JLabel conStatV = new JLabel(Integer.toString(stats.getCon()), SwingConstants.CENTER);
+			JLabel intStatV = new JLabel(Integer.toString(stats.getIntel()), SwingConstants.CENTER);
+			JLabel wisStatV = new JLabel(Integer.toString(stats.getWis()), SwingConstants.CENTER);
+			JLabel chaStatV = new JLabel(Integer.toString(stats.getCha()), SwingConstants.CENTER);
+			
+			JLabel savingThrows = new JLabel("<html><b>Saving Throws</b></html>");
+			JLabel skills = new JLabel("<html><b>Skills</b></html>");
+			JLabel dImmunities = new JLabel("<html><b>Damage Immunities</b></html>");
+			JLabel cImmunities = new JLabel("<html><b>Condition Immunities</b></html>");
+			JLabel senses = new JLabel("<html><b>Senses</b></html>");
+			JLabel languages = new JLabel("<html><b>Languages</b></html>");
+			JLabel challenge = new JLabel("<html><b>Challenge</b></html>");
+			
+		    JPanel monsterSheet = new JPanel();    
+		    Dimension dimension = new Dimension(300, 500);
+		    monsterSheet.setMaximumSize(dimension);
+		    monsterSheet.setMinimumSize(dimension);
+		    monsterSheet.setPreferredSize(dimension);
+		    monsterSheet.setLayout(new GridBagLayout());
+		    GridBagConstraints c = new GridBagConstraints();
+		    c.fill = GridBagConstraints.BOTH;
+		    c.gridx = 0;
+		    c.gridy = 0;
+		    c.ipady = 10;
+	        c.ipadx = 10;
+		    c.gridheight = 1;
+		    c.gridwidth = 6;
 		    
-			tabbedPane.addTab("Monster Sheet", monsterSheet);
+		    monsterSheet.add(name, c);
+		    
+		    c.gridy = 1;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 2;
+
+		    monsterSheet.add(armorClass, c);
+		    c.gridy = 3;
+		    monsterSheet.add(hitPoints, c);
+		    c.gridy = 4;
+		    monsterSheet.add(speed, c);
+		    
+		    c.gridy = 5;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 6;
+		    c.gridwidth = 1;
+		    monsterSheet.add(strStat, c);
+		    c.gridx = 1;
+		    monsterSheet.add(dexStat, c);
+		    c.gridx = 2;
+		    monsterSheet.add(conStat, c);
+		    c.gridx = 3;
+		    monsterSheet.add(intStat, c);
+		    c.gridx = 4;
+		    monsterSheet.add(wisStat, c);
+		    c.gridx = 5;
+		    monsterSheet.add(chaStat, c);
+		    
+		    c.gridy = 7;
+		    c.gridx = 0;
+		    c.gridwidth = 1;
+		    monsterSheet.add(strStatV, c);
+		    c.gridx = 1;
+		    monsterSheet.add(dexStatV, c);
+		    c.gridx = 2;
+		    monsterSheet.add(conStatV, c);
+		    c.gridx = 3;
+		    monsterSheet.add(intStatV, c);
+		    c.gridx = 4;
+		    monsterSheet.add(wisStatV, c);
+		    c.gridx = 5;
+		    monsterSheet.add(chaStatV, c);
+		    
+		    c.gridx = 0;
+		    c.gridy = 8;
+		    c.gridwidth = 6;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 9;
+		    monsterSheet.add(savingThrows, c);
+		    c.gridy = 10;
+		    monsterSheet.add(skills, c);
+		    c.gridy = 11;
+		    monsterSheet.add(dImmunities, c);
+		    c.gridy = 12;
+		    monsterSheet.add(cImmunities, c);
+		    c.gridy = 13;
+		    monsterSheet.add(senses, c);
+		    c.gridy = 14;
+		    monsterSheet.add(languages, c);
+		    c.gridy = 15;
+		    monsterSheet.add(challenge, c);
+		    
+		    JScrollPane scrPane = new JScrollPane(monsterSheet);
+		    
+			tabbedPane.addTab("Monster Sheet", scrPane);
 			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 		}
 	}
@@ -68,7 +175,6 @@ public class Main {
 	    frame.setLocation(100,100);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
 	}
 
 }
