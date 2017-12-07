@@ -1,0 +1,11 @@
+Slashing/Bludgeoning/Piercing from non-magical weapons
+Fire
+Cold
+Electricity
+Thunder
+Poison
+Necrotic
+Radiant
+Psychic
+Force
+Acid

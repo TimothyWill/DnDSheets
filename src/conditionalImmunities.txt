@@ -1,0 +1,12 @@
+Blinded
+Charmed
+Deafened
+Frightened
+Grappled
+Incapacitated
+Paralyzed
+Petrified
+Poisoned
+Prone
+Restrained
+Stunned

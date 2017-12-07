@@ -1,0 +1,9 @@
+Lawfull Good
+Neutral Good
+Chaotic Good
+Lawfull Neutral
+True Neutral
+Chaotic Neutral
+Lawful Evil
+Neutral Evil
+Chaotic Evil

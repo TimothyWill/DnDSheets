@@ -1,7 +1,8 @@
 import java.util.Random;
 
 public class Generator {
-	Random rand = new Random();
+	private Random rand = new Random();
+	
 	
 	public Generator(){ }
 	

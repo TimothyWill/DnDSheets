@@ -1,0 +1,19 @@
+-Common-
+Common
+Dwarvish
+Elvish
+-Uncommon-
+Giant
+Gnomish
+Goblin
+Halfling
+Orc
+-Rare-
+Draconic
+Abyssal
+Celestial
+Deep Speech
+Infernal
+Primordial
+Sylvan
+Undercommon
