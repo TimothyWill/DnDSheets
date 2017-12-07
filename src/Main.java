@@ -14,7 +14,7 @@ public class Main {
 			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
 			JLabel armorClass = new JLabel("<html><b>Armor Class </b>" + Integer.toString(stats.getAc()) + "</html>");
 			JLabel hitPoints = new JLabel("<html><b>Hit Points </b>" + Integer.toString(stats.getHp()) + "</html>");
-			JLabel speed = new JLabel("<html><b>Speed </b>" + "speedVal" + "</html>");
+			JLabel speed = new JLabel("<html><b>Speed </b>" + Integer.toString(stats.getSpeed()) + "</html>");
 			
 			JLabel strStat = new JLabel("<html><b>STR</b></html>", SwingConstants.CENTER);
 			JLabel dexStat = new JLabel("<html><b>DEX</b></html>", SwingConstants.CENTER);
@@ -24,11 +24,11 @@ public class Main {
 			JLabel chaStat = new JLabel("<html><b>CHA</b></html>", SwingConstants.CENTER);
 			
 			JLabel strStatV = new JLabel(stats.getStr() + " (" + (stats.getStrM()<0?"":"+") + stats.getStrM() + ")", SwingConstants.CENTER);
-			JLabel dexStatV = new JLabel(Integer.toString(stats.getDex()), SwingConstants.CENTER);
-			JLabel conStatV = new JLabel(Integer.toString(stats.getCon()), SwingConstants.CENTER);
-			JLabel intStatV = new JLabel(Integer.toString(stats.getIntel()), SwingConstants.CENTER);
-			JLabel wisStatV = new JLabel(Integer.toString(stats.getWis()), SwingConstants.CENTER);
-			JLabel chaStatV = new JLabel(Integer.toString(stats.getCha()), SwingConstants.CENTER);
+			JLabel dexStatV = new JLabel(stats.getDex() + " (" + (stats.getDexM()<0?"":"+") + stats.getDexM() + ")", SwingConstants.CENTER);
+			JLabel conStatV = new JLabel(stats.getCon() + " (" + (stats.getConM()<0?"":"+") + stats.getConM() + ")", SwingConstants.CENTER);
+			JLabel intStatV = new JLabel(stats.getIntel() + " (" + (stats.getIntelM()<0?"":"+") + stats.getIntelM() + ")", SwingConstants.CENTER);
+			JLabel wisStatV = new JLabel(stats.getWis() + " (" + (stats.getWisM()<0?"":"+") + stats.getWisM() + ")", SwingConstants.CENTER);
+			JLabel chaStatV = new JLabel(stats.getCha() + " (" + (stats.getChaM()<0?"":"+") + stats.getChaM() + ")", SwingConstants.CENTER);
 			
 			JLabel savingThrows = new JLabel("<html><b>Saving Throws</b></html>");
 			JLabel skills = new JLabel("<html><b>Skills</b></html>");
@@ -38,8 +38,10 @@ public class Main {
 			JLabel languages = new JLabel("<html><b>Languages</b></html>");
 			JLabel challenge = new JLabel("<html><b>Challenge</b></html>");
 			
+			JLabel action = new JLabel("<html><font size=5><b>Action</b></font></html>");
+			
 		    JPanel monsterSheet = new JPanel();    
-		    Dimension dimension = new Dimension(300, 500);
+		    Dimension dimension = new Dimension(500, 500);
 		    monsterSheet.setMaximumSize(dimension);
 		    monsterSheet.setMinimumSize(dimension);
 		    monsterSheet.setPreferredSize(dimension);
@@ -49,7 +51,7 @@ public class Main {
 		    c.gridx = 0;
 		    c.gridy = 0;
 		    c.ipady = 10;
-	        c.ipadx = 10;
+	        c.ipadx = 25;
 		    c.gridheight = 1;
 		    c.gridwidth = 6;
 		    
@@ -118,7 +120,18 @@ public class Main {
 		    c.gridy = 15;
 		    monsterSheet.add(challenge, c);
 		    
-		    JScrollPane scrPane = new JScrollPane(monsterSheet);
+		    c.gridy = 16;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 17;
+		    monsterSheet.add(action, c);
+		    
+		    c.gridy = 18;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    JPanel scrollPaneContainer = new JPanel( new BorderLayout() );
+		    scrollPaneContainer.add(monsterSheet, BorderLayout.PAGE_START);
+		    JScrollPane scrPane = new JScrollPane(scrollPaneContainer);
 		    
 			tabbedPane.addTab("Monster Sheet", scrPane);
 			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
