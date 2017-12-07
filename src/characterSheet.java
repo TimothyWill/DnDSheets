@@ -153,6 +153,30 @@ public class characterSheet {
                 + file + "'");                  
         }
 		int hit = hitDice[randomIn];
+		String st[] = new String[12];
+		file = "savingThrow";
+		try {
+			FileInputStream fs= new FileInputStream(file);
+			BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+			int i = 0;
+			while((line = br.readLine()) != null) {
+				st[i]=line;
+				i++;
+			}
+			
+			br.close();
+		}
+		catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" + 
+                    file + "'");                
+        }
+		catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + file + "'");                  
+        }
+		String save = st[randomIn];
 		System.out.print(" from ");//print to the jframe
 		/****************Location*****************/
 		line = null;
@@ -199,19 +223,19 @@ public class characterSheet {
 		System.out.println("Hp: "+hp+" Ac: "+ac);//print to the jframe
 		for(int i=0; i<6; i++) {
 			if(i==0)
-				System.out.print("Strength: ");		/*					*/
-			else if(i==1)							/*					*/
-				System.out.print("Dexterity: ");	/*					*/
-			else if(i==2)							/*		Print		*/
-				System.out.print("Constitution: ");	/*		To			*/
-			else if(i==3)							/*		The			*/
-				System.out.print("Intelegence: ");	/*		jframe		*/
-			else if(i==4)							/*					*/
-				System.out.print("Wisdom: ");		/*					*/
-			else if(i==5)							/*					*/
-				System.out.print("Charisma: ");		/*					*/
+				System.out.print("Str: ");	/*					*/
+			else if(i==1)					/*					*/
+				System.out.print("Dex: ");	/*					*/
+			else if(i==2)					/*		Print		*/
+				System.out.print("Con: ");	/*		To			*/
+			else if(i==3)					/*		The			*/
+				System.out.print("Int: ");	/*		jframe		*/
+			else if(i==4)					/*					*/
+				System.out.print("Wiz: ");	/*					*/
+			else if(i==5)					/*					*/
+				System.out.print("Cha: ");	/*					*/
 			System.out.print(array[i]+" ("+mod[i]+")");//print to the jframe
 		}
-		
+		System.out.println("\nSaving Throw Proficiencies: "+st);
 	}
 }
