@@ -4,17 +4,17 @@ public class MonsterStats {
 	
 	private int str, dex, con, intel, wis, cha;
 	private int strM, dexM, conM, intelM, wisM, chaM;
-	private int hp, ac, speed;
+	private int hp, ac, speed, profBonus;
 	private double cr;
 	String savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
 	
-	private int CRACAvg[] = {  13, 13, 13, 13, 13,  13,  13,  14,  15,  15,  15,  16,  16,  17,  17,  17,  18,  18,  18,  18,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19 };
-	private int CRHPMin[] = {   1,  7, 36, 50, 71,  86, 101, 116, 131, 146, 161, 176, 191, 206, 221, 236, 251, 266, 281, 296, 311, 326, 341, 356, 401, 446, 491, 536, 581, 626, 671, 716, 761, 806 };
-	private int CRHPMax[] = {   6, 35, 49, 70, 85, 100, 115, 130, 145, 160, 175, 190, 205, 220, 235, 250, 265, 280, 295, 310, 325, 340, 355, 400, 445, 490, 535, 580, 625, 670, 715, 760, 805, 850 };
-	private int CRABAvg[] = {   3,  3,  3,  3,  3,   3,   4,   5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   8,   8,   9,  10,  10,  10,  10,  11,  11,  11,  12,  12,  12,  13,  13,  13,  14 };
-	private int CRDmgMin[] = {  0,  2,  4,  6,  9,  15,  21,  27,  33,  39,  45,  51,  57,  63,  69,  75,  81,  87,  93,  99, 105, 111, 117, 123, 141, 159, 177, 195, 213, 231, 249, 267, 285, 303 };
-	private int CRDmgMax[] = {  1,  3,  5,  8, 14,  20,  26,  32,  38,  44,  50,  56,  62,  68,  74,  80,  86,  92,  98, 104, 110, 116, 122, 140, 158, 176, 194, 212, 230, 248, 266, 284, 302, 320 };
-	private int CRSaveDC[] = { 13, 13, 13, 13, 13,  13,  13,  14,  15,  15,  15,  16,  16,  16,  17,  17,  18,  18,  18,  18,  19,  19,  19,  19,  20,  20,  20,  21,  21,  21,  22,  22,  22,  23 };
+	public static int CRACAvg[] = {  13, 13, 13, 13, 13,  13,  13,  14,  15,  15,  15,  16,  16,  17,  17,  17,  18,  18,  18,  18,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19 };
+	public static int CRHPMin[] = {   1,  7, 36, 50, 71,  86, 101, 116, 131, 146, 161, 176, 191, 206, 221, 236, 251, 266, 281, 296, 311, 326, 341, 356, 401, 446, 491, 536, 581, 626, 671, 716, 761, 806 };
+	public static int CRHPMax[] = {   6, 35, 49, 70, 85, 100, 115, 130, 145, 160, 175, 190, 205, 220, 235, 250, 265, 280, 295, 310, 325, 340, 355, 400, 445, 490, 535, 580, 625, 670, 715, 760, 805, 850 };
+	public static int CRABAvg[] = {   3,  3,  3,  3,  3,   3,   4,   5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   8,   8,   9,  10,  10,  10,  10,  11,  11,  11,  12,  12,  12,  13,  13,  13,  14 };
+	public static int CRDmgMin[] = {  0,  2,  4,  6,  9,  15,  21,  27,  33,  39,  45,  51,  57,  63,  69,  75,  81,  87,  93,  99, 105, 111, 117, 123, 141, 159, 177, 195, 213, 231, 249, 267, 285, 303 };
+	public static int CRDmgMax[] = {  1,  3,  5,  8, 14,  20,  26,  32,  38,  44,  50,  56,  62,  68,  74,  80,  86,  92,  98, 104, 110, 116, 122, 140, 158, 176, 194, 212, 230, 248, 266, 284, 302, 320 };
+	public static int CRSaveDC[] = { 13, 13, 13, 13, 13,  13,  13,  14,  15,  15,  15,  16,  16,  16,  17,  17,  18,  18,  18,  18,  19,  19,  19,  19,  20,  20,  20,  21,  21,  21,  22,  22,  22,  23 };
 	
 	public MonsterStats() { }
 	
@@ -215,6 +215,25 @@ public class MonsterStats {
 	public double calculateCR(int armorClass, int hitPoints, int attackBonus, int damagePerRound, int saveDC) {
 		double defCR = calculateDefensiveCR(armorClass, hitPoints);
 		double offCR = calculateOffensiveCR(attackBonus, damagePerRound, saveDC);
-		return (int)Math.ceil((defCR + offCR) / 2.0);
+		double avgCR;
+		if(defCR < 0 || offCR < 0) {
+			avgCR = -1;
+		}
+		else {
+			avgCR = (int)Math.ceil((defCR + offCR) / 2.0);
+			if(avgCR < 0.125) {
+				avgCR = 0;
+			}
+			else if(avgCR < 0.25) {
+				avgCR = 0.125;
+			}
+			else if(avgCR < 0.5) {
+				avgCR = 0.25;
+			}
+			else if(avgCR < 1) {
+				avgCR = 0.5;
+			}
+		}
+		return avgCR;
 	}
 }
