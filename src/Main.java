@@ -23,7 +23,7 @@ public class Main {
 			JLabel wisStat = new JLabel("<html><b>WIS</b></html>", SwingConstants.CENTER);
 			JLabel chaStat = new JLabel("<html><b>CHA</b></html>", SwingConstants.CENTER);
 			
-			JLabel strStatV = new JLabel(Integer.toString(stats.getStr()), SwingConstants.CENTER);
+			JLabel strStatV = new JLabel(stats.getStr() + " (" + (stats.getStrM()<0?"":"+") + stats.getStrM() + ")", SwingConstants.CENTER);
 			JLabel dexStatV = new JLabel(Integer.toString(stats.getDex()), SwingConstants.CENTER);
 			JLabel conStatV = new JLabel(Integer.toString(stats.getCon()), SwingConstants.CENTER);
 			JLabel intStatV = new JLabel(Integer.toString(stats.getIntel()), SwingConstants.CENTER);
