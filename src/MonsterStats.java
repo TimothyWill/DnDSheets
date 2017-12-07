@@ -1,10 +1,16 @@
+import java.util.Random;
+
 public class MonsterStats {
-	Generator gen = new Generator();
+	private Generator gen = new Generator();
+	private DataReader data = new DataReader();
+	private Random rand = new Random();
+	
 	private int[] abilities = new int[6];
 	
 	private int str, dex, con, intel, wis, cha;
 	private int strM, dexM, conM, intelM, wisM, chaM;
 	private int hp, ac, speed;
+	private int proficiency;
 	private double cr;
 	private String alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
 	
@@ -28,6 +34,90 @@ public class MonsterStats {
 		this.setCha(abilities[5]);
 		this.setAc(10 + this.getDexM());
 		this.setSpeed(30);
+		this.setProficiency(2);
+	}
+	
+	public void generateStatistics(){
+		this.setAlignment(data.getAlignment());
+		this.setType(data.getMonsterType());
+		
+		String savingThrowsGen = "";
+		int savingThrowsNum = rand.nextInt(10)+1;
+		if(savingThrowsNum > 4){
+			savingThrowsNum = 0;
+		}
+		int[] savingThrowsCheck = {0, 0, 0, 0, 0, 0};
+		for(int i=0; i<savingThrowsNum; i++){
+			int newSavingThrow;
+			do{
+				newSavingThrow = rand.nextInt(6);
+			}while(savingThrowsCheck[newSavingThrow] == 1);
+			savingThrowsCheck[newSavingThrow] = 1;
+		}
+		for(int i=0; i<savingThrowsCheck.length; i++){
+			String currentName = "";
+			int currentMod = 0;
+			if(savingThrowsCheck[i] == 1){
+				switch(i){
+				case 0:
+					currentName = "Str";
+					currentMod = this.getStrM();
+					break;
+				case 1:
+					currentName = "Dex";
+					currentMod = this.getDexM();
+					break;
+				case 2:
+					currentName = "Int";
+					currentMod = this.getIntelM();
+					break;
+				case 3:
+					currentName = "Con";
+					currentMod = this.getConM();
+					break;
+				case 4:
+					currentName = "Wis";
+					currentMod = this.getWisM();
+					break;
+				case 5:
+					currentName = "Cha";
+					currentMod = this.getChaM();
+					break;
+				}
+				currentMod += this.getProficiency();
+				if(currentMod >= 0){
+					currentName += " +" + currentMod;
+				}
+				else{
+					currentName += " -" + currentMod;
+				}
+				savingThrowsGen += ", " + currentName;
+			}
+		}
+		if(savingThrowsNum == 0){
+			this.setSavingThrows("");
+		}
+		else{
+			this.setSavingThrows(savingThrowsGen.substring(2, savingThrowsGen.length()));
+		}
+		
+		//TODO skills
+		
+		//TODO sences
+		
+		//TODO damage vulnerabilities, resistances, immunities
+		
+		//TODO conditions
+		
+		//TODO languages
+	}
+
+	private int getProficiency() {
+		return proficiency;
+	}
+
+	private void setProficiency(int proficiency) {
+		this.proficiency = proficiency;
 	}
 
 	public int getStr() {
@@ -157,6 +247,86 @@ public class MonsterStats {
 	}
 	
 	
+	public String getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(String alignment) {
+		this.alignment = alignment;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getSavingThrows() {
+		return savingThrows;
+	}
+
+	public void setSavingThrows(String savingThrows) {
+		this.savingThrows = savingThrows;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getSenses() {
+		return senses;
+	}
+
+	public void setSenses(String senses) {
+		this.senses = senses;
+	}
+
+	public String getVulnerabilities() {
+		return vulnerabilities;
+	}
+
+	public void setVulnerabilities(String vulnerabilities) {
+		this.vulnerabilities = vulnerabilities;
+	}
+
+	public String getImmunites() {
+		return immunites;
+	}
+
+	public void setImmunites(String immunites) {
+		this.immunites = immunites;
+	}
+
+	public String getResistances() {
+		return resistances;
+	}
+
+	public void setResistances(String resistances) {
+		this.resistances = resistances;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	public String getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(String languages) {
+		this.languages = languages;
+	}
+
 	//Comment
 	private double calculateDefensiveCR(int armorClass, int hitPoints) {
 		if(hitPoints > CRHPMax[CRHPMax.length - 1]) {
