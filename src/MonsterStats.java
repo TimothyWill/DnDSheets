@@ -5,7 +5,7 @@ public class MonsterStats {
 	private int str, dex, con, intel, wis, cha;
 	private int strM, dexM, conM, intelM, wisM, chaM;
 	private int hp, ac, speed;
-	String savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
+	private String alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
 	
 	private int CRHPMin[] = {  1,  7, 36, 50, 71,  86, 101, 116, 131, 146, 161, 176, 191, 206, 221, 236, 251, 266, 281, 296, 311, 326, 341, 356, 401, 446, 491, 536, 581, 626, 671, 716, 761, 806 };
 	private int CRHPMax[] = {  6, 35, 49, 70, 85, 100, 115, 130, 145, 160, 175, 190, 205, 220, 235, 250, 265, 280, 295, 310, 325, 340, 355, 400, 445, 490, 535, 580, 625, 670, 715, 760, 805, 850 };
@@ -21,8 +21,8 @@ public class MonsterStats {
 		this.setIntel(abilities[3]);
 		this.setWis(abilities[4]);
 		this.setCha(abilities[5]);
-//		this.setHp(gen.generateHP(totalDice, hitDice, conMod));
 		this.setAc(10 + this.getDexM());
+		this.setSpeed(30);
 	}
 
 	public int getStr() {
@@ -142,6 +142,15 @@ public class MonsterStats {
 	public void setAc(int ac) {
 		this.ac = ac;
 	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
 	
 	//Comment
 	private double calculateDefensiveCR(int armorClass, int hitPoints) {
