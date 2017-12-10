@@ -14,7 +14,7 @@ public class DataReader {
 	
 	/**
 	 * Returns a random line from the given file
-	 * @param fr A string with the current file's path
+	 * @param file - A string with the current file's path
 	 * @return The randomly selected line in a String
 	 */
 	private String getRandomLine(String file) {
@@ -52,30 +52,133 @@ public class DataReader {
 	}
 	
 	/**
-	 * Returns a random conditional immunity, read from the conditional immunities text file
-	 * @return The conditional immunity in a string
+	 * Returns a list of conditional immunities, read from the conditional immunities text file
+	 * @param numConImms - The number of conditional immunities to be returned
+	 * @return An array of conditional immunities
 	 */
-	public String getConditionalImmunity() {
-		String randomConditionalImmunity = getRandomLine("./src/conditionalImmunities.txt");
-		return randomConditionalImmunity;
+	public String[] getConditionalImmunity(int numConImms) {
+		// list
+		ArrayList<String> conImms = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numConImms; i++) {
+			do {
+				currString = getRandomLine("./src/conditionalImmunities.txt");
+				if (!conImms.contains(currString)) {
+					conImms.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// create return array
+		String[] conImmsArr = conImms.toArray(new String[conImms.size()]);
+		
+		return conImmsArr;
 	}
 	
 	/**
-	 * Returns a random damage immunity, read from the damages text file
-	 * @return The damage immunity in a string
+	 * Generates a list of damage vulnerabilites, resistances, and immunities and returns it
+	 * @param numValues - An array of three values which correspond to how many of each damage
+	 * 					item should be returned
+	 * @return A 2D string array of the list of damage items
 	 */
-	public String getDamage() {
-		String randomDamage = getRandomLine("./src/damages.txt");
-		return randomDamage;
+	public String[][] getDamage(int[] numValues) {
+		int numVulnerabilities = numValues[0];
+		int numResistances = numValues[1];
+		int numImmunities = numValues[2];
+		
+		// lists
+		ArrayList<String> vulns = new ArrayList<String>();
+		ArrayList<String> resis = new ArrayList<String>();
+		ArrayList<String> imms = new ArrayList<String>();
+		
+		// temps
+		String currString = new String();
+		boolean duplicate = true;
+		
+		// generate vulnerabilities
+		for (int i = 0; i < numVulnerabilities; i++) {
+			do {
+				currString = getRandomLine("./src/damages.txt");
+				if (!vulns.contains(currString)) {
+					vulns.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// generate resistances
+		for (int i = 0; i < numResistances; i++) {
+			do {
+				currString = getRandomLine("./src/damages.txt");
+				if (!resis.contains(currString) && !vulns.contains(currString)) {
+					resis.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// generate resistances
+		for (int i = 0; i < numImmunities; i++) {
+			do {
+				currString = getRandomLine("./src/damages.txt");
+				if (!imms.contains(currString) && !resis.contains(currString) && !vulns.contains(currString)) {
+					imms.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// create return array
+		String[][] damages = {
+				vulns.toArray(new String[vulns.size()]),
+				resis.toArray(new String[resis.size()]),
+				imms.toArray(new String[imms.size()])};
+		
+		return damages;
 	}
 	
 	/**
-	 * Returns a random language, read from the languages text file
-	 * @return The language in a string
+	 * Returns a random list of languages, read from the languages text file
+	 * @param numLangs - The number of languages to be returned
+	 * @return An array of languages
 	 */
-	public String getLanguage() {
-		String randomLanguage = getRandomLine("./src/languages.txt");
-		return randomLanguage;
+	public String[] getLanguage(int numLangs) {
+		// list
+		ArrayList<String> langs = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numLangs; i++) {
+			do {
+				currString = getRandomLine("./src/languages.txt");
+				if (!langs.contains(currString)) {
+					langs.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// create return array
+		String[] langsArr = langs.toArray(new String[langs.size()]);
+		
+		return langsArr;
 	}
 	
 	/**
@@ -88,12 +191,34 @@ public class DataReader {
 	}
 	
 	/**
-	 * Returns a random sense, read from the senses text file
-	 * @return The sense in a string
+	 * Returns a list of random senses, read from the senses text file
+	 * @param numSenses - The number of senses to be returned
+	 * @return An array of senses
 	 */
-	public String getSense() {
-		String randomSense = getRandomLine("./src/senses.txt");
-		return randomSense;
+	public String[] getSense(int numSenses) {
+		// list
+		ArrayList<String> senses = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numSenses; i++) {
+			do {
+				currString = getRandomLine("./src/senses.txt");
+				if (!senses.contains(currString)) {
+					senses.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// create return array
+		String[] sensesArr = senses.toArray(new String[senses.size()]);
+		
+		return sensesArr;
 	}
 	
 	/**
@@ -106,11 +231,33 @@ public class DataReader {
 	}
 	
 	/**
-	 * Returns a random skill, read from the skills text file
-	 * @return The skill in a string
+	 * Returns a list of random skills, read from the skills text file
+	 * @param numSkills - The number of skills to be returned
+	 * @return An array of skills
 	 */
-	public String getSkill() {
-		String randomSkill = getRandomLine("./src/skills.txt");
-		return randomSkill;
+	public String[] getSkill(int numSkills) {
+		// list
+		ArrayList<String> skills = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numSkills; i++) {
+			do {
+				currString = getRandomLine("./src/skills.txt");
+				if (!skills.contains(currString)) {
+					skills.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// create return array
+		String[] skillsArr = skills.toArray(new String[skills.size()]);
+		
+		return skillsArr;
 	}
 }
