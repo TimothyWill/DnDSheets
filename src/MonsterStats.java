@@ -24,7 +24,12 @@ public class MonsterStats {
 	
 	public MonsterStats() { }
 	
-	public void generateAbilities() {
+	public void generate(){
+		this.generateAbilities();
+		this.generateStatistics();
+	}
+	
+	private void generateAbilities() {
 		abilities = gen.generateAbilities(false);
 		this.setStr(abilities[0]);
 		this.setDex(abilities[1]);
@@ -37,7 +42,7 @@ public class MonsterStats {
 		this.setProficiency(2);
 	}
 	
-	public void generateStatistics(){
+	private void generateStatistics(){
 		//TODO name
 		
 		String[] sizes = {"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
