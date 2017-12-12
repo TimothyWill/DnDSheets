@@ -41,6 +41,7 @@ public class MonsterStats {
 		this.setAlignment(data.getAlignment());
 		this.setType(data.getMonsterType());
 		
+		
 		String savingThrowsGen = "";
 		int savingThrowsNum = rand.nextInt(10)+1;
 		if(savingThrowsNum > 4){
@@ -101,15 +102,102 @@ public class MonsterStats {
 			this.setSavingThrows(savingThrowsGen.substring(2, savingThrowsGen.length()));
 		}
 		
-		//TODO skills
 		
-		//TODO sences
+		String skillsGen = "";
+		int[] skillsNumList = {0, 0, 0, 1, 1, 2, 2, 3, 4, 5};
+		int skillsNum = rand.nextInt(10);
+		String[] skillsArray = data.getSkill(skillsNumList[skillsNum]);
+		for(int i=0; i<skillsArray.length; i++){
+			String mod = skillsArray[i].substring(skillsArray[i].length()-3, skillsArray[i].length());
+			int modNum = 0;
+			switch(mod){
+			case "STR":
+				modNum = this.getStrM();
+				break;
+			case "DES":
+				modNum = this.getDexM();
+				break;
+			case "CON":
+				modNum = this.getConM();
+				break;
+			case "INT":
+				modNum = this.getIntelM();
+				break;
+			case "WIS":
+				modNum = this.getWisM();
+				break;
+			case "CHA":
+				modNum = this.getChaM();
+				break;
+			}
+			skillsGen += ", " + skillsArray[i].substring(0, skillsArray[i].length()-3) + " +" + (this.getProficiency()+modNum);
+		}
+		if(skillsNumList[skillsNum] != 0){
+			skillsGen = skillsGen.substring(2, skillsGen.length());
+		}
+		this.setSkills(skillsGen);
 		
-		//TODO damage vulnerabilities, resistances, immunities
 		
-		//TODO conditions
+		String sensesGen = "";
+		int sensesNum = rand.nextInt(3)+1;
+		String[] distances = {"10ft", "30ft", "60ft", "120ft"};
+		String[] sensesArray = data.getSense(sensesNum);
+		for(int i=0; i<sensesArray.length; i++){
+			if(sensesArray[i].substring(sensesArray[i].length()-1, sensesArray[i].length()).equals("*")){
+				sensesGen += ", " + sensesArray[i].substring(0, sensesArray[i].length()-1) + " +" + (10+this.getWisM());
+			}
+			else{
+				sensesGen += ", " + sensesArray[i] + " " + distances[rand.nextInt(distances.length)];
+			}
+		}
+		this.setSenses(sensesGen.substring(2, sensesGen.length()));
 		
-		//TODO languages
+		
+		int[] damageNum = new int[3];
+		for(int i=0; i<damageNum.length; i++){
+			damageNum[i] = rand.nextInt(10)+1;
+			if(damageNum[i] > 3){
+				damageNum[i] = 0;
+			}
+		}
+		String[][] damages = data.getDamage(damageNum);
+		String[] finDamages = {"", "", ""};
+		for(int i=0; i<finDamages.length; i++){
+			for(int j=0; j<damages[i].length; j++){
+				finDamages[i] += ", " + damages[i][j];
+			}
+			if(damageNum[i] != 0){
+				finDamages[i] = finDamages[i].substring(2, finDamages[i].length());
+			}
+		}
+		this.setVulnerabilities(finDamages[0]);
+		this.setResistances(finDamages[1]);
+		this.setImmunites(finDamages[2]);
+		
+		
+		String conditionGen = "";
+		int conditionNum = rand.nextInt(10)+1;
+		if(conditionNum > 4){
+			conditionNum = 0;
+		}
+		if(conditionNum > 0){
+			String[] conditionArray = data.getConditionalImmunity(conditionNum);
+			for(int i=0; i<conditionArray.length; i++){
+				conditionGen += ", " + conditionArray[i];
+			}
+			conditionGen = conditionGen.substring(2, conditionGen.length());
+		}
+		this.setCondition(conditionGen);
+		
+		
+		String languageGen = "";
+		int languageNum = rand.nextInt(5)+1;
+		String[] languageArray = data.getLanguage(languageNum);
+		for(int i=0; i<languageArray.length; i++){
+			languageGen += ", " + languageArray[i];
+		}
+		languageGen = languageGen.substring(2, languageGen.length());
+		this.setLanguages(languageGen);
 	}
 
 	private int getProficiency() {
