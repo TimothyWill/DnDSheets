@@ -1,0 +1,12 @@
+Str, Con
+Dex, Cha
+Wis, Cha
+Int, Wis
+Str, Con
+Str, Dex
+Wis, Cha
+Str, Dex
+Dex, Int
+Con, Cha
+Wis, Cha
+Int, Wis

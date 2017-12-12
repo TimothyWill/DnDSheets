@@ -149,7 +149,109 @@ public class Main {
 	   
 	private static class CharacterButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-		    	  	
+			characterSheet chara = new characterSheet();
+			chara.character();
+			
+			//JLabel name = new JLabel("<html><font size=6><b>Character Name</b></font></html>");
+			JLabel name = new JLabel("<html><font size=6><b>"+chara.getName()+"</b></font></html>");
+			JLabel back = new JLabel("<html><b>A <b>"+chara.getTrait()+"<b> <b>"+chara.getRace()+"<b> <b>"+
+					chara.getClas()+"<b> from <b>"+chara.getLoc()+"<html>");
+			JLabel ac = new JLabel("<html><b>Armor Class </b>" + Integer.toString(chara.getAc()) + 
+					"</html>");
+			JLabel hp = new JLabel("<html><b>Hit Points </b>" + Integer.toString(chara.getHp()) + 
+					"</html>");
+			JLabel strStat = new JLabel("<html><b>STR</b></html>", SwingConstants.CENTER);
+			JLabel dexStat = new JLabel("<html><b>DEX</b></html>", SwingConstants.CENTER);
+			JLabel conStat = new JLabel("<html><b>CON</b></html>", SwingConstants.CENTER);
+			JLabel intStat = new JLabel("<html><b>INT</b></html>", SwingConstants.CENTER);
+			JLabel wisStat = new JLabel("<html><b>WIS</b></html>", SwingConstants.CENTER);
+			JLabel chaStat = new JLabel("<html><b>CHA</b></html>", SwingConstants.CENTER);
+			
+			JLabel strStatV = new JLabel(chara.getStr() + " (" + (chara.getStrM()<0?"":"+") + chara.getStrM() + 
+					")", SwingConstants.CENTER);
+			JLabel dexStatV = new JLabel(chara.getDex() + " (" + (chara.getDexM()<0?"":"+") + chara.getDexM() + 
+					")", SwingConstants.CENTER);
+			JLabel conStatV = new JLabel(chara.getCon() + " (" + (chara.getConM()<0?"":"+") + chara.getConM() + 
+					")", SwingConstants.CENTER);
+			JLabel intStatV = new JLabel(chara.getIntel() + " (" + (chara.getIntelM()<0?"":"+") + chara.getIntelM() + 
+					")", SwingConstants.CENTER);
+			JLabel wisStatV = new JLabel(chara.getWis() + " (" + (chara.getWisM()<0?"":"+") + chara.getWisM() + 
+					")", SwingConstants.CENTER);
+			JLabel chaStatV = new JLabel(chara.getCha() + " (" + (chara.getChaM()<0?"":"+") + chara.getChaM() + 
+					")", SwingConstants.CENTER);
+			
+			JLabel save = new JLabel("<html><b>Saving Throws: <b>"+chara.getSave()+"</html>");
+			
+			JPanel charSheet = new JPanel();    
+		    Dimension dimension = new Dimension(300, 500);
+		    charSheet.setMaximumSize(dimension);
+		    charSheet.setMinimumSize(dimension);
+		    charSheet.setPreferredSize(dimension);
+		    charSheet.setLayout(new GridBagLayout());
+		    GridBagConstraints c = new GridBagConstraints();
+		    c.fill = GridBagConstraints.BOTH;
+		    c.gridx = 0;
+		    c.gridy = 0;
+		    c.ipady = 10;
+	        c.ipadx = 10;
+		    c.gridheight = 1;
+		    c.gridwidth = 6;
+		    
+		    charSheet.add(name, c);
+		    c.gridy = 1;
+		    charSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    c.gridy = 2;
+		    charSheet.add(back, c);
+		    c.gridy = 3;
+		    charSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    c.gridy = 4;
+		    charSheet.add(ac, c);
+		    c.gridy = 5;
+		    charSheet.add(hp, c);
+		    c.gridy = 6;
+		    charSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 7;
+		    c.gridwidth = 1;
+		    charSheet.add(strStat, c);
+		    c.gridx = 1;
+		    charSheet.add(dexStat, c);
+		    c.gridx = 2;
+		    charSheet.add(conStat, c);
+		    c.gridx = 3;
+		    charSheet.add(intStat, c);
+		    c.gridx = 4;
+		    charSheet.add(wisStat, c);
+		    c.gridx = 5;
+		    charSheet.add(chaStat, c);
+		    
+		    c.gridy = 8;
+		    c.gridwidth = 1;
+		    c.gridx = 0;
+		    charSheet.add(strStatV, c);
+		    c.gridx = 1;
+		    charSheet.add(dexStatV, c);
+		    c.gridx = 2;
+		    charSheet.add(conStatV, c);
+		    c.gridx = 3;
+		    charSheet.add(intStatV, c);
+		    c.gridx = 4;
+		    charSheet.add(wisStatV, c);
+		    c.gridx = 5;
+		    charSheet.add(chaStatV, c);
+		    c.gridy = 9;
+		    c.gridx = 0;
+		    c.gridwidth = 6;
+		    charSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 10;
+		    charSheet.add(save, c);
+		    
+		    
+		    JScrollPane scrPane = new JScrollPane(charSheet);
+		    
+			tabbedPane.addTab("Character Sheet", scrPane);
+			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 		}
 	}
 	   
