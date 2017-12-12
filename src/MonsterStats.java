@@ -12,7 +12,7 @@ public class MonsterStats {
 	private int hp, ac, speed;
 	private int proficiency;
 	private double cr;
-	private String alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
+	private String name, size, alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
 	
 	public static int CRACAvg[] = {  13, 13, 13, 13, 13,  13,  13,  14,  15,  15,  15,  16,  16,  17,  17,  17,  18,  18,  18,  18,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19 };
 	public static int CRHPMin[] = {   1,  7, 36, 50, 71,  86, 101, 116, 131, 146, 161, 176, 191, 206, 221, 236, 251, 266, 281, 296, 311, 326, 341, 356, 401, 446, 491, 536, 581, 626, 671, 716, 761, 806 };
@@ -38,7 +38,13 @@ public class MonsterStats {
 	}
 	
 	public void generateStatistics(){
+		//TODO name
+		
+		String[] sizes = {"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
+		this.setSize(sizes[rand.nextInt(sizes.length)]);
+		
 		this.setAlignment(data.getAlignment());
+		
 		this.setType(data.getMonsterType());
 		
 		
@@ -335,6 +341,22 @@ public class MonsterStats {
 	}
 	
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
 	public String getAlignment() {
 		return alignment;
 	}
