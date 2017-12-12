@@ -9,8 +9,7 @@ public class Main {
 	private static class MonsterButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			MonsterStats stats = new MonsterStats();
-			stats.generateAbilities();
-			stats.generateStatistics();
+			stats.generate();
 			
 			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
 			JLabel description = new JLabel("<html><font size=2><i>" + stats.getSize() + " " + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
