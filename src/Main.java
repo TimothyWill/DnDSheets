@@ -13,7 +13,7 @@ public class Main {
 			stats.generateStatistics();
 			
 			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
-			JLabel description = new JLabel("<html><font size=2><i>" + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
+			JLabel description = new JLabel("<html><font size=2><i>" + stats.getSize() + " " + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
 			JLabel armorClass = new JLabel("<html><b>Armor Class </b>" + Integer.toString(stats.getAc()) + "</html>");
 			JLabel hitPoints = new JLabel("<html><b>Hit Points </b>" + Integer.toString(stats.getHp()) + "</html>");
 			JLabel speed = new JLabel("<html><b>Speed </b>" + Integer.toString(stats.getSpeed()) + "</html>");
@@ -111,19 +111,26 @@ public class Main {
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
 		    
 		    c.gridy = 10;
-		    monsterSheet.add(savingThrows, c);
+		    if (stats.getSavingThrows() != "")
+		    		monsterSheet.add(savingThrows, c);
 		    c.gridy = 11;
-		    monsterSheet.add(skills, c);
+		    if (stats.getSkills() != "")
+		    		monsterSheet.add(skills, c);
 		    c.gridy = 12;
-		    monsterSheet.add(vulnerabilities, c);
+		    if (stats.getVulnerabilities() != "")
+		    		monsterSheet.add(vulnerabilities, c);
 		    c.gridy = 13;
-		    monsterSheet.add(resistances, c);
+		    if (stats.getResistances() != "")
+		    		monsterSheet.add(resistances, c);
 		    c.gridy = 14;
-		    monsterSheet.add(dImmunities, c);
+		    if (stats.getImmunites() != "")
+		    		monsterSheet.add(dImmunities, c);
 		    c.gridy = 15;
-		    monsterSheet.add(cImmunities, c);
+		    if (stats.getCondition() != "")
+		    		monsterSheet.add(cImmunities, c);
 		    c.gridy = 16;
-		    monsterSheet.add(senses, c);
+		    if (stats.getSenses() != "")
+		    		monsterSheet.add(senses, c);
 		    c.gridy = 17;
 		    monsterSheet.add(languages, c);
 		    c.gridy = 18;
