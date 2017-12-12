@@ -10,8 +10,10 @@ public class Main {
 		public void actionPerformed(ActionEvent e) {
 			MonsterStats stats = new MonsterStats();
 			stats.generateAbilities();
+			stats.generateStatistics();
 			
 			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
+			JLabel description = new JLabel("<html><font size=2><i>" + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
 			JLabel armorClass = new JLabel("<html><b>Armor Class </b>" + Integer.toString(stats.getAc()) + "</html>");
 			JLabel hitPoints = new JLabel("<html><b>Hit Points </b>" + Integer.toString(stats.getHp()) + "</html>");
 			JLabel speed = new JLabel("<html><b>Speed </b>" + Integer.toString(stats.getSpeed()) + "</html>");
@@ -30,13 +32,15 @@ public class Main {
 			JLabel wisStatV = new JLabel(stats.getWis() + " (" + (stats.getWisM()<0?"":"+") + stats.getWisM() + ")", SwingConstants.CENTER);
 			JLabel chaStatV = new JLabel(stats.getCha() + " (" + (stats.getChaM()<0?"":"+") + stats.getChaM() + ")", SwingConstants.CENTER);
 			
-			JLabel savingThrows = new JLabel("<html><b>Saving Throws</b></html>");
-			JLabel skills = new JLabel("<html><b>Skills</b></html>");
-			JLabel dImmunities = new JLabel("<html><b>Damage Immunities</b></html>");
-			JLabel cImmunities = new JLabel("<html><b>Condition Immunities</b></html>");
-			JLabel senses = new JLabel("<html><b>Senses</b></html>");
-			JLabel languages = new JLabel("<html><b>Languages</b></html>");
-			JLabel challenge = new JLabel("<html><b>Challenge</b></html>");
+			JLabel savingThrows = new JLabel("<html><b>Saving Throws </b>" + stats.getSavingThrows() + "</html>");
+			JLabel skills = new JLabel("<html><b>Skills </b>" + stats.getSkills() + "</html>");
+			JLabel vulnerabilities = new JLabel("<html><b>Damage Vulnerabilities </b>" + stats.getVulnerabilities() + "</html>");
+			JLabel resistances = new JLabel("<html><b>Damage Resistances </b>" + stats.getResistances() + "</html>");
+			JLabel dImmunities = new JLabel("<html><b>Damage Immunities </b>" + stats.getImmunites() + "</html>");
+			JLabel cImmunities = new JLabel("<html><b>Condition Immunities </b>" + stats.getCondition() + "</html>");
+			JLabel senses = new JLabel("<html><b>Senses </b>" + stats.getSenses() + "</html>");
+			JLabel languages = new JLabel("<html><b>Languages </b>" + (stats.getLanguages()==""?"--":stats.getLanguages()) + "</html>");
+			JLabel challenge = new JLabel("<html><b>Challenge </b>" + "</html>");
 			
 			JLabel action = new JLabel("<html><font size=5><b>Action</b></font></html>");
 			
@@ -56,22 +60,23 @@ public class Main {
 		    c.gridwidth = 6;
 		    
 		    monsterSheet.add(name, c);
-		    
 		    c.gridy = 1;
-		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    monsterSheet.add(description, c);
 		    
 		    c.gridy = 2;
-
-		    monsterSheet.add(armorClass, c);
-		    c.gridy = 3;
-		    monsterSheet.add(hitPoints, c);
-		    c.gridy = 4;
-		    monsterSheet.add(speed, c);
-		    
-		    c.gridy = 5;
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
 		    
+		    c.gridy = 3;
+		    monsterSheet.add(armorClass, c);
+		    c.gridy = 4;
+		    monsterSheet.add(hitPoints, c);
+		    c.gridy = 5;
+		    monsterSheet.add(speed, c);
+		    
 		    c.gridy = 6;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 7;
 		    c.gridwidth = 1;
 		    monsterSheet.add(strStat, c);
 		    c.gridx = 1;
@@ -85,7 +90,7 @@ public class Main {
 		    c.gridx = 5;
 		    monsterSheet.add(chaStat, c);
 		    
-		    c.gridy = 7;
+		    c.gridy = 8;
 		    c.gridx = 0;
 		    c.gridwidth = 1;
 		    monsterSheet.add(strStatV, c);
@@ -101,32 +106,36 @@ public class Main {
 		    monsterSheet.add(chaStatV, c);
 		    
 		    c.gridx = 0;
-		    c.gridy = 8;
+		    c.gridy = 9;
 		    c.gridwidth = 6;
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
 		    
-		    c.gridy = 9;
-		    monsterSheet.add(savingThrows, c);
 		    c.gridy = 10;
-		    monsterSheet.add(skills, c);
+		    monsterSheet.add(savingThrows, c);
 		    c.gridy = 11;
-		    monsterSheet.add(dImmunities, c);
+		    monsterSheet.add(skills, c);
 		    c.gridy = 12;
-		    monsterSheet.add(cImmunities, c);
+		    monsterSheet.add(vulnerabilities, c);
 		    c.gridy = 13;
-		    monsterSheet.add(senses, c);
+		    monsterSheet.add(resistances, c);
 		    c.gridy = 14;
-		    monsterSheet.add(languages, c);
+		    monsterSheet.add(dImmunities, c);
 		    c.gridy = 15;
+		    monsterSheet.add(cImmunities, c);
+		    c.gridy = 16;
+		    monsterSheet.add(senses, c);
+		    c.gridy = 17;
+		    monsterSheet.add(languages, c);
+		    c.gridy = 18;
 		    monsterSheet.add(challenge, c);
 		    
-		    c.gridy = 16;
+		    c.gridy = 19;
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
 		    
-		    c.gridy = 17;
+		    c.gridy = 20;
 		    monsterSheet.add(action, c);
 		    
-		    c.gridy = 18;
+		    c.gridy = 21;
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
 		    
 		    JPanel scrollPaneContainer = new JPanel( new BorderLayout() );
