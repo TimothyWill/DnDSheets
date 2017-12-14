@@ -260,4 +260,82 @@ public class DataReader {
 		
 		return skillsArr;
 	}
+	
+	/**
+	 * Returns a list of random actions, read from the actions text file
+	 * @param numActions - The number of actions to be returned
+	 * @return An array of actions
+	 */
+	public String[] getActions(int numActions) {
+		// list
+		ArrayList<String> actions = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numActions; i++) {
+			do {
+				currString = getRandomLine("./src/actions.txt");
+				if (!actions.contains(currString)) {
+					actions.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		// create return array
+		String[] actionsArr = actions.toArray(new String[actions.size()]);
+		
+		return actionsArr;
+	}
+	
+	/**
+	 * Returns random adjectives, concatenated to a single string
+	 * @param numAdj - The number of adjectives to be generated (0, 1 or 2)
+	 * @return The adjective(s) in a single string
+	 */
+	public String getAdjectives(int numAdj) {
+		// list
+		ArrayList<String> adjectives = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numAdj; i++) {
+			do {
+				currString = getRandomLine("./src/adjective.txt");
+				if (!adjectives.contains(currString)) {
+					adjectives.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		String adjectivesStr = "";
+		
+		// create return string
+		for(String adjective:adjectives) {
+			adjectivesStr += adjective + " ";
+		}
+		
+		// get rid of trailing space
+		adjectivesStr = adjectivesStr.substring(0, adjectivesStr.length()-1);
+		
+		return adjectivesStr;
+	}
+	
+	/**
+	 * Returns a random name, read from the name text file
+	 * @return A random name
+	 */
+	public String getName() {
+		String randomName = getRandomLine("./src/name.txt");
+		return randomName;
+	}
 }
