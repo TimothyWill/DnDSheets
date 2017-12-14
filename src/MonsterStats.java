@@ -43,7 +43,13 @@ public class MonsterStats {
 	}
 	
 	private void generateStatistics(){
-		//TODO name
+		String nameGen = "";
+		int adNum = rand.nextInt(3);
+		if(adNum > 0){
+			nameGen += data.getAdjectives(adNum);
+		}
+		nameGen += " " + data.getName();
+		this.setName(nameGen);
 		
 		String[] sizes = {"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
 		this.setSize(sizes[rand.nextInt(sizes.length)]);
