@@ -338,4 +338,36 @@ public class DataReader {
 		String randomName = getRandomLine("./src/name.txt");
 		return randomName;
 	}
+	
+	/**
+	 * Returns random passive abilities, generated from the passiveAbilites text file
+	 * @param numPass - The number of passive abilities to be generated
+	 * @return An array of passive abilities
+	 */
+	public String[] getPassiveAbilities(int numPass) {
+		// list
+		ArrayList<String> passives = new ArrayList<String>();
+		
+		// temps
+		String currString;
+		boolean duplicate = true;
+		
+		for (int i = 0; i < numPass; i++) {
+			do {
+				currString = getRandomLine("./src/passiveAbilities.txt");
+				if (!passives.contains(currString)) {
+					passives.add(currString);
+					duplicate = false;
+				} else {
+					duplicate = true;
+				}
+			} while (duplicate);
+		}
+		
+		
+		// create return array
+		String[] passivesArr = passives.toArray(new String[passives.size()]);
+		
+		return passivesArr;
+	}
 }
