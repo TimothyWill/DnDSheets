@@ -12,8 +12,9 @@ public class MonsterStats {
 	private int hp, ac, speed;
 	private int proficiency;
 	private double cr;
-	private String name, size, alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages; 
+	private String name, size, alignment, type, savingThrows, skills, senses, vulnerabilities, immunites, resistances, condition, languages, passiveAbilities, activeAbilites; 
 	
+	public static int CRProfB[] = {   2,  2,  2,  2,  2,   2,   2,   2,   3,   3,   3,   3,   4,   4,   4,   4,   5,   5,   5,   5,   6,   6,   6,   6,   7,   7,   7,   7,   8,   8,   8,   8,   9,   9 };
 	public static int CRACAvg[] = {  13, 13, 13, 13, 13,  13,  13,  14,  15,  15,  15,  16,  16,  17,  17,  17,  18,  18,  18,  18,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19,  19 };
 	public static int CRHPMin[] = {   1,  7, 36, 50, 71,  86, 101, 116, 131, 146, 161, 176, 191, 206, 221, 236, 251, 266, 281, 296, 311, 326, 341, 356, 401, 446, 491, 536, 581, 626, 671, 716, 761, 806 };
 	public static int CRHPMax[] = {   6, 35, 49, 70, 85, 100, 115, 130, 145, 160, 175, 190, 205, 220, 235, 250, 265, 280, 295, 310, 325, 340, 355, 400, 445, 490, 535, 580, 625, 670, 715, 760, 805, 850 };
@@ -24,12 +25,12 @@ public class MonsterStats {
 	
 	public MonsterStats() { }
 	
-	public void generate(){
-		this.generateAbilities();
+	public void generate(int cr){
+		this.generateAbilities(cr);
 		this.generateStatistics();
 	}
 	
-	private void generateAbilities() {
+	private void generateAbilities(int cr) {
 		abilities = gen.generateAbilities(false);
 		this.setStr(abilities[0]);
 		this.setDex(abilities[1]);
@@ -37,13 +38,29 @@ public class MonsterStats {
 		this.setIntel(abilities[3]);
 		this.setWis(abilities[4]);
 		this.setCha(abilities[5]);
-		this.setAc(10 + this.getDexM());
 		this.setSpeed(30);
-		this.setProficiency(2);
+		if(cr == -1){
+			int[] hitDiceSizes = {6, 8, 10, 12};
+			this.setHp(gen.generateHP(rand.nextInt(10)+1, hitDiceSizes[rand.nextInt(4)], this.getConM()));
+			this.setAc(10 + this.getDexM());
+			this.setProficiency(2);
+		}
+		else{
+			int crStats[] = gen.generateStatsWithCR(cr, this.getDexM(), this.getStrM(), this.getConM());
+			this.setProficiency(crStats[0]);
+			this.setAc(crStats[1]);
+			this.setHp(crStats[4]);
+		}
 	}
 	
 	private void generateStatistics(){
-		//TODO name
+		String nameGen = "";
+		int adNum = rand.nextInt(3);
+		if(adNum > 0){
+			nameGen += data.getAdjectives(adNum);
+		}
+		nameGen += " " + data.getName();
+		this.setName(nameGen);
 		
 		String[] sizes = {"Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"};
 		this.setSize(sizes[rand.nextInt(sizes.length)]);
@@ -440,6 +457,22 @@ public class MonsterStats {
 
 	public void setLanguages(String languages) {
 		this.languages = languages;
+	}
+
+	public String getPassiveAbilities() {
+		return passiveAbilities;
+	}
+
+	public void setPassiveAbilities(String passiveAbilities) {
+		this.passiveAbilities = passiveAbilities;
+	}
+
+	public String getActiveAbilites() {
+		return activeAbilites;
+	}
+
+	public void setActiveAbilites(String activeAbilites) {
+		this.activeAbilites = activeAbilites;
 	}
 
 	//Comment

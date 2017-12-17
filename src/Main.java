@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Main {
 	
@@ -9,7 +14,8 @@ public class Main {
 	private static class MonsterButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			MonsterStats stats = new MonsterStats();
-			stats.generate();
+			int cr = -1;
+			stats.generate(cr);
 			
 			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
 			JLabel description = new JLabel("<html><font size=2><i>" + stats.getSize() + " " + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
@@ -43,12 +49,32 @@ public class Main {
 			
 			JLabel action = new JLabel("<html><font size=5><b>Action</b></font></html>");
 			
-		    JPanel monsterSheet = new JPanel();    
+			JPanel monsterSheet = new JPanel();    
 		    Dimension dimension = new Dimension(500, 500);
 		    monsterSheet.setMaximumSize(dimension);
 		    monsterSheet.setMinimumSize(dimension);
 		    monsterSheet.setPreferredSize(dimension);
 		    monsterSheet.setLayout(new GridBagLayout());
+		    
+		    JButton save = new JButton("Save");
+			save.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent s){
+					Dimension size = monsterSheet.getSize();
+					BufferedImage image = (BufferedImage)monsterSheet.createImage(size.width, size.height);
+					Graphics g = image.getGraphics();
+				    monsterSheet.paint(g);
+				    g.dispose();
+					String monsterName = "Test";
+					String fileName = monsterName + ".png";
+					try{
+						ImageIO.write(image, "png", new File(fileName));
+				    }
+				    catch (IOException error){
+				    	error.printStackTrace();
+				    }
+				}
+			});
+		    
 		    GridBagConstraints c = new GridBagConstraints();
 		    c.fill = GridBagConstraints.BOTH;
 		    c.gridx = 0;
@@ -143,6 +169,9 @@ public class Main {
 		    
 		    c.gridy = 21;
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 22;
+		    monsterSheet.add(save, c);
 		    
 		    JPanel scrollPaneContainer = new JPanel( new BorderLayout() );
 		    scrollPaneContainer.add(monsterSheet, BorderLayout.PAGE_START);
