@@ -289,6 +289,8 @@ public class MonsterStats {
 			}
 		}
 		this.setActiveAbilites(activeGen);
+		
+		this.setCr(this.calculateCR(this.getAc(), this.getHp(), this.getProficiency()+this.getStrM(), 3+this.getStrM(), 8+this.getProficiency()+this.getWisM()));
 	}
 
 	private int getProficiency() {
@@ -536,6 +538,14 @@ public class MonsterStats {
 
 	public void setActiveAbilites(String activeAbilites) {
 		this.activeAbilites = activeAbilites;
+	}
+
+	public double getCr() {
+		return cr;
+	}
+
+	public void setCr(double cr) {
+		this.cr = cr;
 	}
 
 	//Comment
