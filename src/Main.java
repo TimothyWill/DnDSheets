@@ -22,11 +22,11 @@ public class Main {
 			int cr = -1;
 			stats.generate(cr);	
 			
-			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
+			JLabel name = new JLabel("<html><font size=6><b>" + stats.getName() + "</b></font></html>");
 			JLabel description = new JLabel("<html><font size=2><i>" + stats.getSize() + " " + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
-			JLabel armorClass = new JLabel("<html><b>Armor Class </b>" + Integer.toString(stats.getAc()) + "</html>");
-			JLabel hitPoints = new JLabel("<html><b>Hit Points </b>" + Integer.toString(stats.getHp()) + "</html>");
-			JLabel speed = new JLabel("<html><b>Speed </b>" + Integer.toString(stats.getSpeed()) + "</html>");
+			JLabel armorClass = new JLabel("<html><b>Armor Class: </b>" + Integer.toString(stats.getAc()) + "</html>");
+			JLabel hitPoints = new JLabel("<html><b>Hit Points: </b>" + Integer.toString(stats.getHp()) + "</html>");
+			JLabel speed = new JLabel("<html><b>Speed: </b>" + Integer.toString(stats.getSpeed()) + "</html>");
 			
 			JLabel strStat = new JLabel("<html><b>STR</b></html>", SwingConstants.CENTER);
 			JLabel dexStat = new JLabel("<html><b>DEX</b></html>", SwingConstants.CENTER);
@@ -42,20 +42,24 @@ public class Main {
 			JLabel wisStatV = new JLabel(stats.getWis() + " (" + (stats.getWisM()<0?"":"+") + stats.getWisM() + ")", SwingConstants.CENTER);
 			JLabel chaStatV = new JLabel(stats.getCha() + " (" + (stats.getChaM()<0?"":"+") + stats.getChaM() + ")", SwingConstants.CENTER);
 			
-			JLabel savingThrows = new JLabel("<html><b>Saving Throws </b>" + stats.getSavingThrows() + "</html>");
-			JLabel skills = new JLabel("<html><b>Skills </b>" + stats.getSkills() + "</html>");
-			JLabel vulnerabilities = new JLabel("<html><b>Damage Vulnerabilities </b>" + stats.getVulnerabilities() + "</html>");
-			JLabel resistances = new JLabel("<html><b>Damage Resistances </b>" + stats.getResistances() + "</html>");
-			JLabel dImmunities = new JLabel("<html><b>Damage Immunities </b>" + stats.getImmunites() + "</html>");
-			JLabel cImmunities = new JLabel("<html><b>Condition Immunities </b>" + stats.getCondition() + "</html>");
-			JLabel senses = new JLabel("<html><b>Senses </b>" + stats.getSenses() + "</html>");
-			JLabel languages = new JLabel("<html><b>Languages </b>" + (stats.getLanguages()==""?"--":stats.getLanguages()) + "</html>");
-			JLabel challenge = new JLabel("<html><b>Challenge </b>" + "</html>");
+			JLabel savingThrows = new JLabel("<html><b>Saving Throws: </b>" + stats.getSavingThrows() + "</html>");
+			JLabel skills = new JLabel("<html><b>Skills: </b>" + stats.getSkills() + "</html>");
+			JLabel vulnerabilities = new JLabel("<html><b>Damage Vulnerabilities: </b>" + stats.getVulnerabilities() + "</html>");
+			JLabel resistances = new JLabel("<html><b>Damage Resistances: </b>" + stats.getResistances() + "</html>");
+			JLabel dImmunities = new JLabel("<html><b>Damage Immunities: </b>" + stats.getImmunites() + "</html>");
+			JLabel cImmunities = new JLabel("<html><b>Condition Immunities: </b>" + stats.getCondition() + "</html>");
+			JLabel senses = new JLabel("<html><b>Senses: </b>" + stats.getSenses() + "</html>");
+			JLabel languages = new JLabel("<html><b>Languages: </b>" + (stats.getLanguages()==""?"--":stats.getLanguages()) + "</html>");
+			JLabel challenge = new JLabel("<html><b>Challenge: </b>" + "</html>");
+			
+			JLabel passiveAbilities = new JLabel("<html>" + stats.getPassiveAbilities() + "</html>");
 			
 			JLabel action = new JLabel("<html><font size=5><b>Action</b></font></html>");
 			
+			JLabel activeAbilities = new JLabel("<html>" + stats.getActiveAbilites() + "</html>");
+			
 			JPanel monsterSheet = new JPanel();    
-		    Dimension dimension = new Dimension(500, 500);
+		    Dimension dimension = new Dimension(500, 700);
 		    monsterSheet.setMaximumSize(dimension);
 		    monsterSheet.setMinimumSize(dimension);
 		    monsterSheet.setPreferredSize(dimension);
@@ -69,8 +73,7 @@ public class Main {
 					Graphics g = image.getGraphics();
 				    monsterSheet.paint(g);
 				    g.dispose();
-					String monsterName = "Test";
-					String fileName = monsterName + ".png";
+					String fileName = stats.getName() + ".png";
 					try{
 						ImageIO.write(image, "png", new File(fileName));
 				    }
@@ -170,12 +173,20 @@ public class Main {
 		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
 		    
 		    c.gridy = 20;
-		    monsterSheet.add(action, c);
+		    monsterSheet.add(passiveAbilities, c);
 		    
 		    c.gridy = 21;
-		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    monsterSheet.add(action, c);
 		    
 		    c.gridy = 22;
+		    monsterSheet.add(activeAbilities, c);
+		    
+		    c.gridy = 23;
+		    monsterSheet.add(new JSeparator(JSeparator.HORIZONTAL), c);
+		    
+		    c.gridy = 24;
+		    c.gridx = 5;
+		    c.gridwidth = 1;
 		    monsterSheet.add(save, c);
 		    
 		    JPanel scrollPaneContainer = new JPanel( new BorderLayout() );
@@ -294,12 +305,6 @@ public class Main {
 			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 		}
 	}
-	   
-	private static class SummonButtonHandler implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-		    	  	
-		}
-	}
 	
 	public static void main(String[] args) {
 		
@@ -363,20 +368,11 @@ public class Main {
 	    JPanel characterSheet = new JPanel();
 	    characterSheet.setLayout(new BorderLayout());
 	    characterSheet.add(characterGenButton, BorderLayout.SOUTH);
-	    
-	    JButton summonGenButton = new JButton("Generate Summon Sheet");
-	    SummonButtonHandler summonlistener = new SummonButtonHandler();
-	    summonGenButton.addActionListener(summonlistener);
-
-	    JPanel summonSheet = new JPanel();
-	    summonSheet.setLayout(new BorderLayout());
-	    summonSheet.add(summonGenButton, BorderLayout.SOUTH);
 	      
 	    tabbedPane = new JTabbedPane();
 	    tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 	    tabbedPane.addTab("Monster", monsterSheet);
 	    tabbedPane.addTab("Character", characterSheet);
-	    tabbedPane.addTab("Summon", summonSheet);
 	    
 		JFrame frame = new JFrame("Dungeons & Dragons Sheet Generator");
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);;
