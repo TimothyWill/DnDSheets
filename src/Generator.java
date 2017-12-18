@@ -53,10 +53,8 @@ public class Generator {
 		return hp;
 	}
 	
-	private int generateHPWithCR(double cr, int conMod) {
+	private int getCRIndex(double cr) {
 		int crIndex = 0;
-		int hitDice = 0;
-		int totalHPDice = 0;
 		if(cr < 1.0) {
 			if(cr > 0.5) {
 				crIndex = 4;
@@ -74,16 +72,62 @@ public class Generator {
 		else {
 			crIndex = (int)cr + 3;
 		}
-		hitDice = 2 * (rand.nextInt(5) + 2);
-		totalHPDice = MonsterStats.CRHPMax[crIndex] / (hitDice + conMod);
-		return generateHP(totalHPDice, hitDice, conMod);
+		return crIndex;
 	}
 	
-	//Returns Array of stats: {Proficiency Bonus, Armor Class, Hit Points, Attack Bonus, Damage/Round, Save DC}
-	public double[] generateStatsWithCR(double cr, int conMod) {
-		double[] stats = new double[5];
+	private int getRandDie() {
+		return 2 * (rand.nextInt(5) + 2);
+	}
+	
+	private int getTotalHitDice(int crIndex, int hitDie, int conMod) {
+		return MonsterStats.CRHPMax[crIndex] / (hitDie + conMod);
+	}
+	
+	private int getAttackBonus(int profBonus, int dexMod, int strMod) {
+		return profBonus + getDmgBonus(dexMod, strMod);
+	}
+	
+	private int getDmgDice(int crIndex, int dmgDie, int dexMod, int strMod) {
+		int dmgBonus = getDmgBonus(dexMod, strMod);
+		return MonsterStats.CRDmgMax[crIndex] / (dmgDie + dmgBonus);
+	}
+	
+	private int getDmgBonus(int dexMod, int strMod) {
+		int mod = 0;
+		if(dexMod > strMod) {
+			mod  = dexMod;
+		}
+		else {
+			mod = strMod;
+		}
+		return mod;
+	}
+	
+	//Returns Array of stats: {Proficiency Bonus, Armor Class, Hit Die, Total Hit Dice, Hit Points, Attack Bonus, Damage Die, Total Damage Dice, Damage Bonus, Save DC}
+	public int[] generateStatsWithCR(double cr, int dexMod, int strMod, int conMod) {
+		int crIndex = getCRIndex(cr);
+		int[] stats = new int[10];
+		// Proficiency Bonus
+		stats[0] = MonsterStats.CRProfB[crIndex];
+		// Armor Class (AC)
+		stats[1] = MonsterStats.CRACAvg[crIndex];
+		// Hit Die
+		stats[2] = getRandDie();
+		// Total Hit Dice
+		stats[3] = getTotalHitDice(crIndex, (int)stats[2], conMod);	
+		// Hit Points (HP)
+		stats[4] = generateHP((int)stats[3], (int)stats[2], conMod);
+		// Attack Bonus
+		stats[5] = getAttackBonus((int)stats[0], dexMod, strMod);
+		// Damage Die
+		stats[6] = getRandDie();
+		// Total Damage Dice
+		stats[7] = getDmgDice(crIndex, (int)stats[6], dexMod, strMod);
+		// Damage Bonus
+		stats[8] = getDmgBonus(dexMod, strMod);
+		// Save DC
+		stats[9] = MonsterStats.CRSaveDC[crIndex];
 		
-		stats[2] = generateHPWithCR(cr, conMod);
 		return stats;
 	}
 

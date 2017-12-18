@@ -1,0 +1,6 @@
+Keen Hearing. The NAME has advantage on Wisdom (Perception) checks that rely on hearing
+Keen Smell. The NAME has advantage on Wisdom (Perception) checks that rely on smell.
+Magic Resistance. The NAME has advantage on saving throws against spells and other magical effects.
+Surprise Attack. If the NAME surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.
+Brute. A melee weapon deals one extra die of its damage when the NAME hits with it (included in the attack).
+Amphibious. The NAME can breathe air and water.
