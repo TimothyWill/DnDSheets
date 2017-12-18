@@ -312,14 +312,20 @@ public class Main {
 	    JPanel monsterSheet = new JPanel();
 	    monsterSheet.setLayout(new GridBagLayout());
 	    JButton btn = new JButton("OK");
-	    JLabel lbl = new JLabel("Select one of the possible choices and click OK");
-	    String[] choices = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5","CHOICE 6"};
+	    JLabel lbl = new JLabel("Select a skill to favor");
+	    JLabel lbl1 = new JLabel("Select a size for your Monter");
+	    JLabel lbl2 = new JLabel("Select an alignment");
+	    JLabel lbl3 = new JLabel("Select a skill to favor");
+	    
+	    //arrays to fill drop down boxes
+	    String[] choices = { "Strength","Dexerity", "Constituion","Intelligence","Wisdom","Charisma"};
 	    String[] choices1 = {"Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil","Chaotic Evil"};
-	    String[] choices2 = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5","CHOICE 6"};
-
+	    String[] choices2 = { "Tiny","Small", "Medium","Large","Huge","Gargantuan"};
+	    
+	    //Drop down boxes 
 	    final JComboBox<String> cb = new JComboBox<String>(choices);
 	    final JComboBox<String> cb1 = new JComboBox<String>(choices1);
-	    final JComboBox<String> cb2 = new JComboBox<String>(choices);
+	    final JComboBox<String> cb2 = new JComboBox<String>(choices2);
 	    final JComboBox<String> cb3 = new JComboBox<String>(choices);
 	    final JComboBox<String> cb4 = new JComboBox<String>(choices);
 	    
@@ -330,16 +336,24 @@ public class Main {
 	    c.ipady = 10;
         c.ipadx = 25;
 	    c.gridheight = 1;
-	    c.gridwidth = 6;
+	    c.gridwidth = 20;
 	    
 	    c.gridy = 1;
 	    monsterSheet.add(monsterGenButton, c);
 	    c.gridy = 2;
 	    monsterSheet.add(btn, c);
 	    c.gridy = 3;
-	    monsterSheet.add(cb,c);
+	    monsterSheet.add(lbl,c);
 	    c.gridy = 4;
+	    monsterSheet.add(cb,c);
+	    c.gridy = 5;
+	    monsterSheet.add(lbl2, c);
+	    c.gridy = 6;
 	    monsterSheet.add(cb1,c);
+	    c.gridy = 7;
+	    monsterSheet.add(lbl1, c);
+	    c.gridy = 8;
+	    monsterSheet.add(cb2,c);
 	    
 	    JButton characterGenButton = new JButton("Generate Character Sheet");
 	    CharacterButtonHandler characterlistener = new CharacterButtonHandler();
