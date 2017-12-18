@@ -4,6 +4,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 import javax.imageio.ImageIO;
 
@@ -302,8 +309,36 @@ public class Main {
 	    monsterGenButton.addActionListener(monsterlistener);
 
 	    JPanel monsterSheet = new JPanel();
-	    monsterSheet.setLayout(new BorderLayout());
-	    monsterSheet.add(monsterGenButton, BorderLayout.SOUTH);
+	    monsterSheet.setLayout(new GridBagLayout());
+	    JButton btn = new JButton("OK");
+	    JLabel lbl = new JLabel("Select one of the possible choices and click OK");
+	    String[] choices = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5","CHOICE 6"};
+	    String[] choices1 = {"Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil","Chaotic Evil"};
+	    String[] choices2 = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5","CHOICE 6"};
+
+	    final JComboBox<String> cb = new JComboBox<String>(choices);
+	    final JComboBox<String> cb1 = new JComboBox<String>(choices1);
+	    final JComboBox<String> cb2 = new JComboBox<String>(choices);
+	    final JComboBox<String> cb3 = new JComboBox<String>(choices);
+	    final JComboBox<String> cb4 = new JComboBox<String>(choices);
+	    
+	    GridBagConstraints c = new GridBagConstraints();
+	    c.fill = GridBagConstraints.BOTH;
+	    c.gridx = 0;
+	    c.gridy = 0;
+	    c.ipady = 10;
+        c.ipadx = 25;
+	    c.gridheight = 1;
+	    c.gridwidth = 6;
+	    
+	    c.gridy = 1;
+	    monsterSheet.add(monsterGenButton, c);
+	    c.gridy = 2;
+	    monsterSheet.add(btn, c);
+	    c.gridy = 3;
+	    monsterSheet.add(cb,c);
+	    c.gridy = 4;
+	    monsterSheet.add(cb1,c);
 	    
 	    JButton characterGenButton = new JButton("Generate Character Sheet");
 	    CharacterButtonHandler characterlistener = new CharacterButtonHandler();
