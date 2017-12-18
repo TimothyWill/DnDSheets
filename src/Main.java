@@ -4,17 +4,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
 
 import javax.imageio.ImageIO;
 
@@ -26,7 +20,7 @@ public class Main {
 		public void actionPerformed(ActionEvent e) {
 			MonsterStats stats = new MonsterStats();
 			int cr = -1;
-			stats.generate(cr);
+			stats.generate(cr);	
 			
 			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
 			JLabel description = new JLabel("<html><font size=2><i>" + stats.getSize() + " " + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
@@ -315,7 +309,6 @@ public class Main {
 
 	    JPanel monsterSheet = new JPanel();
 	    monsterSheet.setLayout(new GridBagLayout());
-	    JButton btn = new JButton("OK");
 	    JLabel lbl = new JLabel("Select a skill to favor");
 	    JLabel lbl1 = new JLabel("Select a size for your Monster");
 	    JLabel lbl2 = new JLabel("Select an alignment");
