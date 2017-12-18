@@ -11,6 +11,10 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 import javax.imageio.ImageIO;
 
@@ -313,21 +317,23 @@ public class Main {
 	    monsterSheet.setLayout(new GridBagLayout());
 	    JButton btn = new JButton("OK");
 	    JLabel lbl = new JLabel("Select a skill to favor");
-	    JLabel lbl1 = new JLabel("Select a size for your Monter");
+	    JLabel lbl1 = new JLabel("Select a size for your Monster");
 	    JLabel lbl2 = new JLabel("Select an alignment");
-	    JLabel lbl3 = new JLabel("Select a skill to favor");
+	    JLabel lbl3 = new JLabel("Select a Challenge Rating");
 	    
 	    //arrays to fill drop down boxes
 	    String[] choices = { "Strength","Dexerity", "Constituion","Intelligence","Wisdom","Charisma"};
 	    String[] choices1 = {"Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil","Chaotic Evil"};
 	    String[] choices2 = { "Tiny","Small", "Medium","Large","Huge","Gargantuan"};
+	    String[] choices3 = { "Very Easy","Easy", "Medium","Hard","Very Hard"};
 	    
 	    //Drop down boxes 
 	    final JComboBox<String> cb = new JComboBox<String>(choices);
 	    final JComboBox<String> cb1 = new JComboBox<String>(choices1);
 	    final JComboBox<String> cb2 = new JComboBox<String>(choices2);
-	    final JComboBox<String> cb3 = new JComboBox<String>(choices);
+	    final JComboBox<String> cb3 = new JComboBox<String>(choices3);
 	    final JComboBox<String> cb4 = new JComboBox<String>(choices);
+	    
 	    
 	    GridBagConstraints c = new GridBagConstraints();
 	    c.fill = GridBagConstraints.BOTH;
@@ -338,10 +344,12 @@ public class Main {
 	    c.gridheight = 1;
 	    c.gridwidth = 20;
 	    
-	    c.gridy = 1;
+	    c.gridy = 10;
 	    monsterSheet.add(monsterGenButton, c);
+	    c.gridy = 1;
+	    monsterSheet.add(lbl3, c);
 	    c.gridy = 2;
-	    monsterSheet.add(btn, c);
+	    monsterSheet.add(cb3, c);
 	    c.gridy = 3;
 	    monsterSheet.add(lbl,c);
 	    c.gridy = 4;
