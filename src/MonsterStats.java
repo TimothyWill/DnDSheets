@@ -226,6 +226,69 @@ public class MonsterStats {
 		}
 		languageGen = languageGen.substring(2, languageGen.length());
 		this.setLanguages(languageGen);
+		
+		
+//		String passiveGen = "";
+//		int passiveNum = rand.nextInt(4)+1;
+//		if(passiveNum > 2){
+//			passiveNum = 0;
+//		}
+//		if(passiveNum > 0){
+//			String[] passiveArray = data.getPassiveAbilites(passiveNum);
+//			for(int i=0; i<passiveArray.length; i++){
+//				for(int j=0; j<passiveArray[i].length(); j++){
+//					if(passiveArray[i].substring(j, j+4).equals("NAME")){
+//						String passive1 = passiveArray[i].substring(0, j-1);
+//						String passive2 = passiveArray[i].substring(j+5, passiveArray[i].length());
+//						passiveGen += passive1 + this.getName() + passive2;
+//					}
+//				}
+//				passiveGen += "\n\n";
+//			}
+//		}
+//		this.setPassiveAbilities(passiveGen);
+//		
+//		
+//		String activeGen = "";
+//		int activeNum = rand.nextInt(5)+1;
+//		if(activeNum > 3){
+//			activeNum = 0;
+//		}
+//		if(activeNum > 0){
+//			String[] activeArray = data.getActiveAbilites(activeNum);
+//			for(int i=0; i<activeArray.length; i++){
+//				for(int j=0; j<activeArray[i].length(); j++){
+//					int mod = 0;
+//					if(activeArray[i].substring(j, j+3).equals("NUM")){
+//						String active1 = activeArray[i].substring(0, j-1);
+//						String active2 = activeArray[i].substring(j+1, activeArray[i].length());
+//						activeArray[i] = active1 + (3+mod) + active2;
+//					}
+//					if(activeArray[i].substring(j, j+3).equals("STR")){
+//						String active1 = activeArray[i].substring(0, j-1);
+//						String active2 = activeArray[i].substring(j+1, activeArray[i].length());
+//						activeArray[i] = active1 + this.getStrM() + active2;
+//					}
+//					if(activeArray[i].substring(j, j+3).equals("DEX")){
+//						String active1 = activeArray[i].substring(0, j-1);
+//						String active2 = activeArray[i].substring(j+1, activeArray[i].length());
+//						activeArray[i] = active1 + this.getDexM() + active2;
+//					}
+//					if(activeArray[i].substring(j, j+4).equals("STRP")){
+//						String active1 = activeArray[i].substring(0, j-1);
+//						String active2 = activeArray[i].substring(j+1, activeArray[i].length());
+//						activeArray[i] = active1 + (this.getStrM()+this.getProficiency()) + active2;
+//					}
+//					if(activeArray[i].substring(j, j+4).equals("DEXP")){
+//						String active1 = activeArray[i].substring(0, j-1);
+//						String active2 = activeArray[i].substring(j+1, activeArray[i].length());
+//						activeArray[i] = active1 + (this.getDexM()+this.getProficiency()) + active2;
+//					}
+//				}
+//				activeGen += activeArray[i] + "\n\n";
+//			}
+//		}
+//		this.setActiveAbilites(activeGen);
 	}
 
 	private int getProficiency() {
