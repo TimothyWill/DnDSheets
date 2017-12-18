@@ -17,7 +17,7 @@ public class Main {
 			int cr = -1;
 			stats.generate(cr);
 			
-			JLabel name = new JLabel("<html><font size=6><b>Monster Name</b></font></html>");
+			JLabel name = new JLabel("<html><font size=6><b>" + stats.getName() + "</b></font></html>");
 			JLabel description = new JLabel("<html><font size=2><i>" + stats.getSize() + " " + stats.getType() + ", " + stats.getAlignment() + "</i></font></html>");
 			JLabel armorClass = new JLabel("<html><b>Armor Class: </b>" + Integer.toString(stats.getAc()) + "</html>");
 			JLabel hitPoints = new JLabel("<html><b>Hit Points: </b>" + Integer.toString(stats.getHp()) + "</html>");
