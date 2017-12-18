@@ -68,8 +68,7 @@ public class Main {
 					Graphics g = image.getGraphics();
 				    monsterSheet.paint(g);
 				    g.dispose();
-					String monsterName = "Test";
-					String fileName = monsterName + ".png";
+					String fileName = stats.getName() + ".png";
 					try{
 						ImageIO.write(image, "png", new File(fileName));
 				    }
